@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 
-// schema defines the structure of the database
+// schema defines the structure of the database. Read more on database validation
 const recipeSchema = new Schema({
-    name: {type: String},
+    name: {type: String, unique: true, required: true}, /*unique: true and required: true are validations done on databases*/
     ingredients: [{type: String}]
 });
 
