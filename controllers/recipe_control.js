@@ -15,9 +15,9 @@ export const getRecipes = async (req, res, next) => { /* next is used to handle 
 export const postRecipes = async (req, res, next) => {
     try {
         // Add recipe to database
-        const newRecipe = await RecipeModel.create(req.body)  /* anywhere there is await, add async at the top*/
+        const newRecipe = await RecipeModel.create(req.body);  /* anywhere there is await, add async at the top*/
         // return response
-        res.json("Recipe Added!");
+        res.json(newRecipe);
     } catch (error) {
         next(error);
     }
@@ -31,7 +31,7 @@ export const patchRecipe = async (req, res, next) => { /* the id can also be cal
         // Return response(res.json("whatever you have to say"))
         res.json("Recipe Updated!")
     } catch (error) {
-        next(error)
+        next(error);
     }
 };
 
@@ -41,9 +41,9 @@ export const deleteRecipe = async (req, res, next) => {
     // delete recipe by id
         const deletedRecipe = await RecipeModel.findByIdAndDelete(req.params.id);
         // Return response(res.json("whatever you have to say"))
-        res.json("Recipe Deleted!")
+        res.json("Recipe Deleted!");
     } catch (error) {
-        next(error)
+        next(error);
     }
 };
 
