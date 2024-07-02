@@ -23,13 +23,25 @@ export const postRecipes = async (req, res, next) => {
     }
 };
 
+/* OLD PATCH RECIPE*/
+// export const patchRecipe = async (req, res, next) => { /* the id can also be called recipeId*/
+//     try {
+//     // update recipe by id using the findIdAndUpdate method
+//         const deletedRecipe = await RecipeModel.findByIdAndUpdate(req.params.id);
+//         // Return response(res.json("whatever you have to say"))
+//         res.json("Recipe Updated!")
+//     } catch (error) {
+//         next(error);
+//     }
+// };
 
-export const patchRecipe = async (req, res, next) => { /* the id can also be called recipeId*/
+// Updating a recipe (New Patch recipe). This is to take effect when the user marks an item as favourite
+export const patchRecipe = async (req, res, next) => {
     try {
-    // update recipe by id using the findIdAndUpdate method
-        const deletedRecipe = await RecipeModel.findByIdAndUpdate(req.params.id);
-        // Return response(res.json("whatever you have to say"))
-        res.json("Recipe Updated!")
+        // update recipe by id
+        const updatedRecipe = await RecipeModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        // return response
+        res.json(updatedRecipe);
     } catch (error) {
         next(error);
     }

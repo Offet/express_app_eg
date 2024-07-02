@@ -22,3 +22,4 @@ export const postCategories = async (req, res, next) => {
         next(error);
     }
 };
+

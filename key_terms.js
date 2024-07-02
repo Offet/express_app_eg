@@ -29,3 +29,23 @@ res.json is preferred because the res.send() might break when working with front
 
 */
 
+
+// Steps in the documentation process
+/* 
+1. npm i expressOasGenerator --force
+2. import expressOasGenerator module
+3. In the index.js file, add exp oas generator
+expressOasGenerator.handleResponses(app, {
+    tags: ["categories", "recipes"],
+    mongooseModels: mongoose.modelNames()
+});
+It should be under the // create express App
+const app = express();
+4. under the use router section (app.use...), type the ff
+expressOasGenerator.handleRequests();
+app.use((req, res) => res.redirect("/api-docs/"));
+5. open anhy breowser on your laptop and type the link to your server in the format:
+http://localhost:3000/api-docs/
+6. Your api will show in the browser
+*/
+
