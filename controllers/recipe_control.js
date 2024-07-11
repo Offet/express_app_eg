@@ -2,8 +2,13 @@ import { RecipeModel } from "../models/recipe_model.js";
 
 export const getRecipes = async (req, res, next) => { /* next is used to handle try catch errors in express*/
     try {
+        //  get all queries
+        const {limit, skip, filter} = req.query; /* the term for this syntax is destructuring*/
         // get all recipes from database 
-    const allRecipes = await RecipeModel.find(); /* find is used to retrieve items*/
+        const allRecipes = await RecipeModel
+            .find(filter) /* .find(fllter) can be replaced with .find{name:search}*/
+            .limit(limit)
+            .skip(skip); /* find is used to retrieve items*/
         // Return all recipes
         res.json(allRecipes);
     } catch (error) {
@@ -14,8 +19,14 @@ export const getRecipes = async (req, res, next) => { /* next is used to handle 
 
 export const postRecipes = async (req, res, next) => {
     try {
+        const {...data} = req.body; /* destructuring the request body into a var called data*/
+        console.log(data);
         // Add recipe to database
-        const newRecipe = await RecipeModel.create(req.body);  /* anywhere there is await, add async at the top*/
+        const newRecipe = await RecipeModel.create({/* anywhere there is await, add async at the top*/
+            // ...req.body,
+            // image: req.file.filename 0
+            data 
+        });  
         // return response
         res.json(newRecipe);
     } catch (error) {

@@ -1,11 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
+import session from "express-session";
 
 // importing express OAS
 import expressOasGenerator from "express-oas-generator";  
 import recipesRouter from "./routes/route.recipe.js";
 //  import category router so that we can use it
 import categoryRouter from "./routes/route.category.js";
+import userRouter from "./routes/auth_route.js";
 
 //  Connect to database
 await mongoose.connect(process.env.MONGO_URL);
@@ -20,9 +22,18 @@ expressOasGenerator.handleResponses(app, {
 });
 
 // Apply middlewares
+// app.use(cors()) ...import the module and instantiate it
 app.use(express.json());
+app.use(express.static("uploads"));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
 
 //  Use routes
+app.use(userRouter);
 app.use(recipesRouter); /* using recipe router*/
 app.use(categoryRouter); /* using category router */
 expressOasGenerator.handleRequests();

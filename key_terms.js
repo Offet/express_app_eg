@@ -47,5 +47,12 @@ app.use((req, res) => res.redirect("/api-docs/"));
 5. open anhy breowser on your laptop and type the link to your server in the format:
 http://localhost:3000/api-docs/
 6. Your api will show in the browser
+
+7. Do not ever apply app.use with multer. instead, do 
+
+
+
+8. json.stringify vs json.parse in frontend and backend
+9. Watch videos on *filtering items in a query with mongodb compass*
 */
 
